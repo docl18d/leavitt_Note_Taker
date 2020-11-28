@@ -1,54 +1,36 @@
-const fs = require("fs");
-var data = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+// CREATE (get), READ (post), UPDATE (put), DELETE (delete) => CRUD
 
 
-module.exports = function(app) {
+// ==========
+// DEPENDENCIES
+// ==========
 
-    app.get("/api/notes", function(req, res) {
-       
-        res.json(data);
+const router = require("express").Router();
+const store = require("./../db/store");
 
-    });
+// ==========
+// ROUTES
+// ==========
 
-    app.get("/api/notes/:id", function(req, res) {
+router.get("/notes", function (req, res) {
+    store
+        .getNotes()
+        .then(notes => res.json(notes))
+        .catch(err => res.status(500).json(err))
+});
 
-        res.json(data[Number(req.params.id)]);
+router.post("/notes", function (req, res) {
+    store
+        .addNote(req.body)
+        .then((notes) => res.json(notes))
+        .catch(err => res.status(500).json(err))
+});
 
-    });
+router.delete("/notes/:title", function (req, res) {
+    store
+        .deleteNotes(req.params.title)
+        .then(() => res.json({ ok: true }))
+        .catch(err => res.status(500).json(err))
+});
 
-
-    app.post("/api/notes", function(req, res) {
-
-        let newNote = req.body;
-        let uniqueId = (data.length).toString();
-        console.log(uniqueId);
-        newNote.id = uniqueId;
-        data.push(newNote);
-        
-        fs.writeFileSync("./db/db.json", JSON.stringify(data), function(err) {
-            if (err) throw (err);        
-        }); 
-
-        res.json(data);    
-
-    });
-
-    
-    app.delete("/api/notes/:id", function(req, res) {
-
-        let noteId = req.params.id;
-        let newId = 0;
-        console.log(`Deleting note with id ${noteId}`);
-        data = data.filter(currentNote => {
-           return currentNote.id != noteId;
-        });
-        for (currentNote of data) {
-            currentNote.id = newId.toString();
-            newId++;
-        }
-        fs.writeFileSync("./db/db.json", JSON.stringify(data));
-        res.json(data);
-    }); 
-
-}
-
+module.exports = router;
