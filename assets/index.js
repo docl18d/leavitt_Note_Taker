@@ -110,9 +110,24 @@ const renderNoteList = (notes) => {
   const create$li = (text, withDeleteButton = true) => {
     const $li = $("<li class='list-group-item'>");
     const $span = $("<span>").text(text);
-    $li.append($span);
+    const $delBtn = $(
+      "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
+    );
+    $li.append($span, $delBtn);
+    noteListItems.push($li);
+  }
 
-    if (withDeleteButton) {
+  $noteList.append(noteListItems);
+};
+
+// Gets notes from the db and renders them to the sidebar
+var getAndRenderNotes = function() {
+  return getNotes().then(function(data) {
+    renderNoteList(data);
+  });
+};
+
+    /*if (withDeleteButton) {
       const $delBtn = $(
         "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
       );
@@ -131,12 +146,12 @@ const renderNoteList = (notes) => {
   });
 
   $noteList.append(noteListItems);
-};
+}; */
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => {
+/* const getAndRenderNotes = () => {
   return getNotes().then(renderNoteList);
-};
+};*/
 
 $saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
