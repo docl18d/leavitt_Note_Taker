@@ -1,6 +1,8 @@
 // Dependencies
 // =============================================================
 const express = require("express");
+const apiRoutes = require("./routes/api_routes.js");
+const htmlRoutes = require("./routes/html_routes.js");
 
 // Sets up the Express App
 // =============================================================
@@ -21,6 +23,4 @@ require("./routing/api_routes")(app);
 
 // Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-});
+app.listen(PORT, () => console.log("App listening on PORT: ${PORT}"));
