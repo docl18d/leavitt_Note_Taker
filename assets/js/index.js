@@ -50,8 +50,8 @@ const renderActiveNote = () => {
 };
 
 // Get the note data from the inputs, save it to the db and update the view
-var handleNoteSave = function () {
-  var newNote = {
+const handleNoteSave = () => {
+  const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val()
   };
@@ -63,11 +63,11 @@ var handleNoteSave = function () {
 };
 
 // Delete the clicked note
-var handleNoteDelete = function (event) {
+const handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
 
-  var note = $(this)
+  const note = $(this)
     .parent(".list-group-item")
     .data();
 
@@ -82,13 +82,13 @@ var handleNoteDelete = function (event) {
 };
 
 // Sets the activeNote and displays it
-var handleNoteView = function () {
+const handleNoteView = function () {
   activeNote = $(this).data();
   renderActiveNote();
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
-var handleNewNoteView = function () {
+const handleNewNoteView = function () {
   activeNote = {};
   renderActiveNote();
 };
@@ -104,17 +104,17 @@ var handleRenderSaveBtn = function () {
 };
 
 // Render's the list of note titles
-var renderNoteList = function (notes) {
+const renderNoteList = function (notes) {
   $noteList.empty();
 
-  var noteListItems = [];
+  const noteListItems = [];
 
-  for (var i = 0; i < notes.length; i++) {
-    var note = notes[i];
+  for (let i = 0; i < notes.length; i++) {
+    const note = notes[i];
 
-    var $li = $("<li class='list-group-item'>").data(note);
-    var $span = $("<span>").text(note.title);
-    var $delBtn = $(
+    const $li = $("<li class='list-group-item'>").data(note);
+    const $span = $("<span>").text(note.title);
+    const $delBtn = $(
       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
     );
 
@@ -126,7 +126,7 @@ var renderNoteList = function (notes) {
 };
 
 // Gets notes from the db and renders them to the sidebar
-var getAndRenderNotes = function () {
+const getAndRenderNotes = function () {
   return getNotes().then(function (data) {
     renderNoteList(data);
   });
