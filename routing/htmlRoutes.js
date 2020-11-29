@@ -1,14 +1,16 @@
 const path = require("path");
-const router = require("express").Router();
 
-// Get notes.html if the url is localhost:3001/notes
-router.get("/notes", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-});
+module.exports = function(app) {
+    
+    app.get("/", function(req, res) {
+        res.sendFile(path.join(__dirname, "/../public/index.html"));
+    });
+    
+    app.get("/notes", function(req, res) {
+        res.sendFile(path.join(__dirname, "/../public/notes.html"));
+    });
 
-// If no matching route is found default to home
-router.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-});
+    
 
-module.exports = router;
+
+}
