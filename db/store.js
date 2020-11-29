@@ -61,7 +61,7 @@ class Store {
                     }
                 }
                 this.write(notes);
-                
+
             })
     }
 };
