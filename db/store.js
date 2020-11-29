@@ -68,4 +68,4 @@ class Store {
 
 const store = new Store();
 
-module.exports = Store;
+module.exports = store;
