@@ -5,7 +5,7 @@
   null
   
   Installation:
-  got to https://lit-inlet-37250.herokuapp.com/ and click on the get started button.  Put in your note Title and then the note text.  Hit the save button in the top right corner.  You can ht the garnage can to get rid of a note.
+  got to https://lit-inlet-37250.herokuapp.com/ and click on the get started button.  Put in your note Title and then the note text.  Hit the save button in the top right corner.  You can hit the garbage can to get rid of a note.
   Usage:
   A note Taker to keep track of notes.
   Contributors:
